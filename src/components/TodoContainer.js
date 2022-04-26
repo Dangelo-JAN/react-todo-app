@@ -6,24 +6,8 @@ import InputTodo from './InputTodo';
 
 class TodoContainer extends Component {
   state = {
-    todos: [
-      {
-        id: uuidv4(),
-        title: 'Setup development environment',
-        completed: true,
-      },
-      {
-        id: uuidv4(),
-        title: 'Develop website and add content',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        title: 'Deploy to live server',
-        completed: false,
-      },
-    ],
-  };
+    todos: [],
+  }
 
   handleChange = (id) => {
     this.setState((prevState) => ({
@@ -64,6 +48,17 @@ class TodoContainer extends Component {
     });
   };
 
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.title = updatedTitle
+        }
+        return todo
+      }),
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -74,6 +69,7 @@ class TodoContainer extends Component {
             todos={this.state.todos}
             handleChangeProps={this.handleChange}
             deleteTodoProps={this.deleteTodo}
+            setUpdateProps={this.setUpdate}
           />
         </div>
       </div>
