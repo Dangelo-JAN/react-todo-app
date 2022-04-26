@@ -1,54 +1,66 @@
-import React, { Component } from "react";
-import TodosList from "./TodosList";
-import Header from "./Header";
-import InputTodo from "./InputTodo";
+import React, { Component } from 'react';
+import { v4 as uuidv4 } from "uuid";
+import TodosList from './TodosList';
+import Header from './Header';
+import InputTodo from './InputTodo';
 
 class TodoContainer extends Component {
   state = {
     todos: [
       {
-        id: 1,
-        title: "Setup development environment",
+        id: uuidv4(),
+        title: 'Setup development environment',
         completed: true,
       },
       {
-        id: 2,
-        title: "Develop website and add content",
+        id: uuidv4(),
+        title: 'Develop website and add content',
         completed: false,
       },
       {
-        id: 3,
-        title: "Deploy to live server",
+        id: uuidv4(),
+        title: 'Deploy to live server',
         completed: false,
       },
-    ]
+    ],
   };
 
-  handleChange = id => {
-    this.setState(prevState => ({
+  handleChange = (id) => {
+    this.setState((prevState) => ({
   // You can also remove this ^ parenthesis and use return statement
   // return {
-      todos: prevState.todos.map(todo => {
+      todos: prevState.todos.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo,
             completed: !todo.completed,
-          }
+          };
         }
         return todo;
-      })
-  // } close the bracket
+      }),
+      // } close the bracket
   // v and remove that bracket  -- both methods work fine
     }));
   };
 
-  deleteTodo = id => {
+  deleteTodo = (id) => {
     this.setState({
       todos: [
-        ...this.state.todos.filter(todo => {
+        ...this.state.todos.filter((todo) => {
           return todo.id !== id;
-        })
-      ]
+        }),
+      ],
+    });
+  };
+
+  addTodoItem = (title) => {
+    const newTodo = {
+      id: uuidv4(),
+      title: title,
+      completed: false,
+    };
+    this.setState({
+      todos: [...this.state.todos, newTodo],
     });
   };
 
@@ -56,7 +68,7 @@ class TodoContainer extends Component {
     return (
       <div>
         <Header />
-        <InputTodo />
+        <InputTodo addTodoItemProps={this.addTodoItem}/>
         <TodosList
           todos={this.state.todos}
           handleChangeProps={this.handleChange}
@@ -65,6 +77,6 @@ class TodoContainer extends Component {
       </div>
     );
   }
-};
+}
 
 export default TodoContainer;

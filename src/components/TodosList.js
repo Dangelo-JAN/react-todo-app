@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import TodoItem from "./TodoItem";
+import React, { Component } from 'react';
+import TodoItem from './TodoItem';
 
 class TodosList extends Component {
   render() {
@@ -13,7 +13,7 @@ class TodosList extends Component {
           />
         ))}
       </ul>
-    )
+    );
   }
 }
 
