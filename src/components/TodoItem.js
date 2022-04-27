@@ -3,9 +3,16 @@ import React, { Component } from 'react';
 import styles from'./TodoItem.module.css';
 
 class TodoItem extends Component {
-  state = {
-    editing: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false,
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("Cleaning up...")
+  }
 
   handleEditing = () => {
     this.setState({
