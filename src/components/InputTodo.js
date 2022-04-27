@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 
 class InputTodo extends Component {
-  state = {
-    title: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+    }
+  }
 
   onChange = e => {
     this.setState({
