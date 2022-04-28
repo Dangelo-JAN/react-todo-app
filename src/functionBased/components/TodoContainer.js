@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Switch } from "react-router-dom";
+import About from "../pages/About";
+import NotMatch from "../pages/NotMatch";
 import { v4 as uuidv4 } from "uuid";
-import TodosList from './TodosList';
 import Header from './Header';
+import Navbar from './Navbar';
+import TodosList from './TodosList';
 import InputTodo from './InputTodo';
 
 const TodoContainer = () => {
@@ -63,18 +67,33 @@ const TodoContainer = () => {
   }
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTodo addTodoItemProps={addTodoItem}/>
-        <TodosList
-          todos={todos}
-          handleChangeProps={handleChange}
-          deleteTodoProps={deleteTodo}
-          setUpdateProps={setUpdate}
-        />
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <switch>
+        <Route exact path="/">
+          <div className="container">
+            <div className="inner">
+              <Header />
+              <InputTodo addTodoItemProps={addTodoItem}/>
+              <TodosList
+                todos={todos}
+                handleChangeProps={handleChange}
+                deleteTodoProps={deleteTodo}
+                setUpdateProps={setUpdate}
+              />
+            </div>
+          </div>
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        {/* Way to know the path, url and the params in the console int the match
+        <Route path="/about" component={About} /> */}
+        <Route path="*">
+          <NotMatch />
+        </Route>
+      </switch>
+    </>
   );
 }
 
